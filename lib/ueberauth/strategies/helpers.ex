@@ -240,7 +240,7 @@ defmodule Ueberauth.Strategy.Helpers do
       query: query,
       scheme: scheme
     }
-    |> to_string()
+    |> to_string() |> IO.inspect(label: "the full url")
   end
 
   defp get_forwarded_proto_header(conn) do
