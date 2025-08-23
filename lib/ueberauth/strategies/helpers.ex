@@ -248,18 +248,24 @@ defmodule Ueberauth.Strategy.Helpers do
   end
 
   defp get_forwarded_proto_header(conn) do
+    IO.puts("Trying to get the x-forwarded-proto")
     conn
     |> get_req_header("x-forwarded-proto")
+    |> IO.inspect(label: "x-forwarded-proto from the conn")
     |> List.first()
   end
 
   defp get_host_header(conn) do
+    IO.puts("Trying to get x-forwarded-host")
     case get_req_header(conn, "x-forwarded-host") do
       [] ->
         get_req_header(conn, "host")
         |> List.first()
 
-      [host | _] ->
+      [host | rest] ->
+        IO.puts("got a host to forward to")
+        IO.inspect(host, label: "host is")
+        IO.inspect(rest, label: "other hosts were")
         host
     end
   end
