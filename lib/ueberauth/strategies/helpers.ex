@@ -68,6 +68,7 @@ defmodule Ueberauth.Strategy.Helpers do
   def callback_url(conn, query_params \\ []) do
     IO.inspect(conn, label: "The callback conn")
     if url = from_private(conn, :callback_url) do
+      IO.puts("callback_url is just using the url in the conn")
       url
     else
       opts = [
@@ -76,6 +77,9 @@ defmodule Ueberauth.Strategy.Helpers do
         path: callback_path(conn),
         query_params: callback_params(conn, query_params)
       ]
+      IO.inspect(opts, label: "callback_url opts")
+
+      IO.inspect(full_url(conn, opts), label: "full url from callback_url")
 
       full_url(conn, opts)
     end
