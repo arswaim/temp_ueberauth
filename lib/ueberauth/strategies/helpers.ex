@@ -208,12 +208,14 @@ defmodule Ueberauth.Strategy.Helpers do
   end
 
   defp full_url(conn, opts) do
+    IO.puts("In full_url")
     scheme =
       cond do
-        scheme = Keyword.get(opts, :scheme) -> scheme
-        scheme = get_forwarded_proto_header(conn) -> scheme
-        true -> to_string(conn.scheme)
+        scheme = Keyword.get(opts, :scheme) -> scheme |> IO.inspect(label: "scheme from opts")
+        scheme = get_forwarded_proto_header(conn) -> scheme |> IO.inspect(label: "scheme from x-forwarded-proto header")
+        true -> to_string(conn.scheme) |> IO.inspect(label: "scheme from conn")
       end
+    IO.inspect(scheme, label: "And the scheme is")
 
     host = get_host_header(conn) || conn.host
 
