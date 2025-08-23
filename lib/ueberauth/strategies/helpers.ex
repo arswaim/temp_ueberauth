@@ -47,6 +47,7 @@ defmodule Ueberauth.Strategy.Helpers do
   """
   @spec request_url(Plug.Conn.t()) :: String.t()
   def request_url(conn, query_params \\ []) do
+    IO.inspect(conn, label: "The conn we're looking for")
     opts = [
       scheme: from_private(conn, :request_scheme),
       port: from_private(conn, :request_port),
