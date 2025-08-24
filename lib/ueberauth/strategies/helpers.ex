@@ -65,7 +65,7 @@ defmodule Ueberauth.Strategy.Helpers do
 
   @spec callback_url(Plug.Conn.t()) :: String.t()
   def callback_url(conn, query_params \\ []) do
-    IO.inspect(conn, label: "The callback conn")
+    # IO.inspect(conn, label: "The callback conn")
     if url = from_private(conn, :callback_url) do
       IO.puts("callback_url is just using the url in the conn")
       url
