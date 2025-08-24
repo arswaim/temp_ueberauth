@@ -47,7 +47,6 @@ defmodule Ueberauth.Strategy.Helpers do
   """
   @spec request_url(Plug.Conn.t()) :: String.t()
   def request_url(conn, query_params \\ []) do
-    IO.inspect(conn, label: "The request conn")
     opts = [
       scheme: from_private(conn, :request_scheme),
       port: from_private(conn, :request_port),
@@ -77,9 +76,8 @@ defmodule Ueberauth.Strategy.Helpers do
         path: callback_path(conn),
         query_params: callback_params(conn, query_params)
       ]
-      IO.inspect(opts, label: "callback_url opts")
 
-      IO.inspect(full_url(conn, opts), label: "full url from callback_url")
+      # IO.inspect(full_url(conn, opts), label: "full url from callback_url")
 
       full_url(conn, opts)
     end
